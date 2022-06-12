@@ -94,3 +94,8 @@ The tickers we use:
 3. Modify content of the folder `server` - if you want to complete bonus tasks
 4. Commit and push your code to your repository
 5. Send us link to your repository
+
+
+// 
+- I have implemented the visual effect to highlight changes in the prices using color. Before that, I had changed the range of price and percent change on the server-side to display the negative change. 
+- I have implemented the possibility of adding/removing tickers from the watchlist by creating two arrays of tickers. If you remove a ticker from one array, it will be added to another
