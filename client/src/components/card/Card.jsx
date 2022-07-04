@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { removeTicker } from "../../service"
 import {
   Typography,
   makeStyles,
@@ -7,8 +8,6 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import RemoveIcon from "@mui/icons-material/Remove";
-
-import { io } from "socket.io-client";
 
 const useStyles = makeStyles({
   flex: {
@@ -37,11 +36,6 @@ function Card() {
   const tickersToDisplay = useSelector(
     (state) => state.tickers?.tickersToDisplay
   );
-
-  const socket = io.connect("http://localhost:4000");
-  function removeTicker(tickerName) {
-    socket.emit("remove", tickerName);
-  }
 
   return (
     <div data-testid="card">
@@ -80,7 +74,9 @@ function Card() {
             </div>
             <Tooltip title="Remove from watchlist">
               <Button
-                onClick={() => removeTicker(item.ticker)}
+                onClick={() => {
+                  removeTicker(item.ticker);
+                }}
                 data-testid="button"
               >
                 <RemoveIcon />

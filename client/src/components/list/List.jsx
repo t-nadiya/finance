@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { displayTicker } from "../../service"
 import {
   makeStyles,
   Paper,
@@ -8,7 +9,6 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
 
-import { io } from "socket.io-client";
 
 const useStyles = makeStyles({
   flex: {
@@ -31,11 +31,7 @@ const useStyles = makeStyles({
 function List() {
   const classes = useStyles();
   const list = useSelector((state) => state.tickers?.tickers);
-
-  const socket = io.connect("http://localhost:4000");
-  function displayTicker(tickerName) {
-    socket.emit("display", tickerName);
-  }
+  
   return (
     <div className={classes.flex} data-testid="smallCard">
       {list?.map((item) => (
@@ -47,7 +43,9 @@ function List() {
           <Typography className={classes.text}>{item.ticker}</Typography>
           <Tooltip title="Add to watchlist">
             <Button
-              onClick={() => displayTicker(item.ticker)}
+              onClick={() => {
+                displayTicker(item.ticker);
+              }}
               data-testid="button"
             >
               <AddIcon />

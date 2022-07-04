@@ -7,6 +7,8 @@ import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from "@material-ui/core/styles";
 import App from "./App";
 
+// import {SocketContext, socket} from "./service"
+
 const customTheme = createTheme({
   palette: {
     primary: {
@@ -22,10 +24,13 @@ const customTheme = createTheme({
 });
 
 ReactDOM.render(
-    <Provider store={store}>
+    // <SocketContext.Provider value={socket}>
+      <Provider store={store}>
       <ThemeProvider theme={customTheme}>
         <App />
       </ThemeProvider>
-    </Provider>,
+      </Provider>,
+    // </SocketContext.Provider>,
+  
   document.getElementById("root") || document.createElement("div")
 );

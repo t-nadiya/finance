@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { io } from "socket.io-client";
+import { socket, connect } from "../service"
 
 export const getTickers = createAsyncThunk(
   "tickers/getTickers",
   async (_, { dispatch }) => {
-    const socket = io.connect("http://localhost:4000");
-    socket.on("connect", () => socket.emit("start"));
+    // socket.on("connect", () => {
+    //   socket.emit("start");
+    // });
+    connect();
     socket.on("ticker", (data) => {
       dispatch(setData(data.allTickers));
       dispatch(displayCard(data.displayTickers));
@@ -33,6 +35,6 @@ export const tickerSlice = createSlice({
     },
   },
 });
-export const { setData, setTimeout, displayCard } = tickerSlice.actions;
+export const { setData, displayCard } = tickerSlice.actions;
 
 export default tickerSlice.reducer;
