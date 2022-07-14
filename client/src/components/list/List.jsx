@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { displayTicker } from "../../service"
+import { useSelector, useDispatch } from "react-redux";
+import { displayTicker } from "../../store/tickerState";
 import {
   makeStyles,
   Paper,
@@ -8,7 +8,6 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
-
 
 const useStyles = makeStyles({
   flex: {
@@ -29,9 +28,10 @@ const useStyles = makeStyles({
 });
 
 function List() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const list = useSelector((state) => state.tickers?.tickers);
-  
+
   return (
     <div className={classes.flex} data-testid="smallCard">
       {list?.map((item) => (
@@ -44,7 +44,7 @@ function List() {
           <Tooltip title="Add to watchlist">
             <Button
               onClick={() => {
-                displayTicker(item.ticker);
+                dispatch(displayTicker(item.ticker));
               }}
               data-testid="button"
             >

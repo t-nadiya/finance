@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { removeTicker } from "../../service"
+import { useSelector, useDispatch } from "react-redux";
+import { removeTicker } from "../../store/tickerState";
 import {
   Typography,
   makeStyles,
@@ -32,6 +32,7 @@ const useStyles = makeStyles({
 });
 
 function Card() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const tickersToDisplay = useSelector(
     (state) => state.tickers?.tickersToDisplay
@@ -76,6 +77,7 @@ function Card() {
               <Button
                 onClick={() => {
                   removeTicker(item.ticker);
+                  dispatch(removeTicker(item.ticker));
                 }}
                 data-testid="button"
               >
