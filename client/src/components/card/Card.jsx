@@ -76,7 +76,6 @@ function Card() {
             <Tooltip title="Remove from watchlist">
               <Button
                 onClick={() => {
-                  removeTicker(item.ticker);
                   dispatch(removeTicker(item.ticker));
                 }}
                 data-testid="button"
